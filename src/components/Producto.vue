@@ -4,14 +4,20 @@
       <h2>Nuevo Producto</h2>
       <!-- <label for="id_nombre">Nombre: </label> -->
 
+      <span v-if="mensaje.final">{{ mensaje.final }}</span>
+
       <p type="Nombre: ">
         <input v-model="nombre" type="text" id="id_nombre" />
       </p>
+      <!-- <span v-if="nombreMensaje">El nombre es obligatorio</span> -->
+      <span v-if="mensaje.nombre">{{ mensaje.nombre }}</span>
 
       <!-- <label for="id_codigo">Código: </label> -->
       <p type="Código: ">
         <input v-model="codigo" type="text" id="id_codigo" />
       </p>
+      <!-- <span v-if="apellidoMensaje">El apellido es obligatorio</span> -->
+      <span v-if="mensaje.codigo">{{ mensaje.codigo }}</span>
 
       <!-- <label for="id_fecha_ela">Fecha de elaboración: </label> -->
       <p type="Fecha de elaboración: ">
@@ -96,8 +102,8 @@ export default {
   data() {
     const hoy = new Date().toISOString().split("T")[0];
     return {
-      nombre: "",
-      codigo: "",
+      nombre: null,
+      codigo: null,
       fechaElaboracion: hoy,
       fechaExpiracion: hoy,
       aplicaDescuento: false,
@@ -106,6 +112,13 @@ export default {
       mensaje: "",
       mostrarMensaje: false,
       esError: false,
+      nombreMensaje: false,
+      apellidoMensaje: false,
+      mensaje: {
+        nombre: null,
+        codigo: null,
+        final: null,
+      },
     };
   },
 
@@ -121,9 +134,13 @@ export default {
     },
 
     agregar() {
-      if (!this.validarInputs()) {
+      if (!this.validarEntradas()) {
         return;
       }
+
+      // if (!this.validarInputs()) {
+      //   return;
+      // }
 
       const nuevoProducto = {
         nombre: this.nombre,
@@ -162,9 +179,32 @@ export default {
       return true;
     },
 
+    validarEntradas() {
+      try {
+        // let validar = this.mensaje.apellido.primero;
+        let numero = 2;
+
+        console.log(this.nombre);
+        if (this.nombre === null) {
+          this.mensaje.nombre = "Nombre es obligatorio";
+          numero--;
+        }
+
+        if (this.codigo === null) {
+          this.mensaje.codigo = "Apellido es obligatorio";
+          numero--;
+        }
+
+        return numero === 2;
+      } catch (error) {
+        console.error("ERROR, ha ocurrido un problema: ", error);
+        this.mensaje.final = "Ha ocurrido un error en el sistema";
+      }
+    },
+
     limpiarInputs() {
-      this.nombre = "";
-      this.codigo = "";
+      this.nombre = null;
+      this.codigo = null;
       this.fechaElaboracion = new Date().toISOString().split("T")[0];
       this.fechaExpiracion = new Date().toISOString().split("T")[0];
       this.aplicaDescuento = false;

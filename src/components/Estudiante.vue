@@ -9,9 +9,11 @@
      Controlador: El JS se encarga de modificar los valores
      -->
     <input v-model="nuevoNombre" id="id_nombre" type="text" />
+    <span v-if="mensaje.nombre">{{ mensaje.nombre }}</span>
 
     <label for="id_apellido">Apellido: </label>
     <input v-model="nuevoApellido" id="id_apellido" type="text" />
+    <span v-if="mensaje.apellido">{{ mensaje.nombre }}</span>
 
     <label for="id_edad">Edad: </label>
     <input v-model="nuevaEdad" id="id_edad" type="number" />
@@ -54,8 +56,8 @@
 export default {
   data() {
     return {
-      nuevoNombre: "Nuevo",
-      nuevoApellido: "Nuevo Apellido",
+      nuevoNombre: null,
+      nuevoApellido: null,
       nuevaEdad: 22,
       estaMatriculado: false,
       nuevoPromedioAcademico: 16.0,
@@ -103,19 +105,25 @@ export default {
           promedioAcademico: 14.23,
         },
       ],
+      mensaje: {
+        nombre: null,
+        apellido: null,
+      },
     };
   },
   methods: {
     agregarEstudiante() {
-      const nuevoEst = {
-        nombre: this.nuevoNombre,
-        apellido: this.nuevoApellido,
-        edad: this.nuevaEdad,
-        matriculado: this.estaMatriculado,
-        promedioAcademico: this.nuevoPromedioAcademico,
-      };
-      //   this.lista.unshift(nuevoEst);
-      this.lista.push(nuevoEst);
+      if (this.validarEntradas()) {
+        const nuevoEst = {
+          nombre: this.nuevoNombre,
+          apellido: this.nuevoApellido,
+          edad: this.nuevaEdad,
+          matriculado: this.estaMatriculado,
+          promedioAcademico: this.nuevoPromedioAcademico,
+        };
+        //   this.lista.unshift(nuevoEst);
+        this.lista.push(nuevoEst);
+      }
     },
     obtenerPathVariable() {
       const cedula = this.$route.params.cedula;
@@ -124,8 +132,21 @@ export default {
       const anio = this.$route.query.anio;
       const mes = this.$route.query.mes;
 
-      console.log('Año: ', anio)
-      console.log('Mes: ', mes)
+      console.log("Año: ", anio);
+      console.log("Mes: ", mes);
+    },
+    validarEntradas() {
+      if (this.nuevoNombre === null) {
+        this.mensaje.nombre = "Nombre es obligatorio";
+        return false;
+      }
+
+      if (this.nuevoApellido === null) {
+        this.mensaje.apellido = "Apellido es obligatorio";
+        return false;
+      }
+
+      return true;
     },
   },
 };
