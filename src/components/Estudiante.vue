@@ -149,6 +149,41 @@ export default {
       return true;
     },
   },
+
+  beforeCreate() {
+    console.log("ETAPA: beforeCreate");
+  },
+  created() {
+    console.log("ETAPA: created");
+  },
+  beforeMount() {
+    console.log("ETAPA: beforeMount");
+  },
+  mounted() {
+    console.log("ETAPA: mounted");
+    //---
+    const cedula = this.$route.params.cedula;
+    console.log("CEDULA: ", cedula);
+
+    const anio = this.$route.query.anio;
+    const mes = this.$route.query.mes;
+
+    console.log("Año: ", anio);
+    console.log("Mes: ", mes);
+  },
+  // Antes de que se actualize
+  beforeUpdate() {
+    console.log("ETAPA: beforeUpdate");
+  },
+  updated() {
+    console.log("ETAPA: updated");
+  },
+  beforeUnmount() {
+    console.log("ETAPA: beforeUnmount");
+  },
+  unmounted() {
+    console.log("ETAPA: unmounted");
+  },
 };
 </script>
 
