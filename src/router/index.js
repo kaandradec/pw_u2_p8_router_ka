@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import EstudianteView from '@/views/EstudianteView.vue'
 import PreguntaView from '@/views/PreguntaView.vue'
 import HolaMundoView from '@/views/HolaMundoView.vue'
+import PokemonView from '@/views/PokemonView.vue'
 
 const routes = [
   // Carga inicial / eager
@@ -21,10 +22,15 @@ const routes = [
     name: 'preguntaView',
     component: PreguntaView
   },
-   {
+  {
     path: '/holaMundo', // nombre de la ruta para navegar mediante la URL
     name: 'holaMundoView',
     component: HolaMundoView
+  },
+  {
+    path: '/pokemon', // nombre de la ruta para navegar mediante la URL
+    name: 'pokemonView',
+    component: PokemonView
   },
   // Carga BAJO DEMANDA lazy loaded/ -> No carga de inicio las páginas,
   // se carga cuendo se necesite.
@@ -46,11 +52,11 @@ const routes = [
     name: 'producto',
     component: () => import(/* webpackChunkName: "about" */ '../views/ProductoView.vue')
   },
-   {
+  {
     path: '/chuck',
     name: 'chuckNorrisView',
     component: () => import(/* webpackChunkName: "about" */ '../views/ChuckNorrisView.vue')
-  }
+  },
 ]
 
 const router = createRouter({
