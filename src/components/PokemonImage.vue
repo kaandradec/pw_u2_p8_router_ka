@@ -1,14 +1,15 @@
 // Objetivo de componente: Mostrar una imagen
 <template>
+  <span style="z-index: 2; color: red">{{ mensaje1 }}</span>
   <div>
     <img
-      v-if="!mostrar"
+      v-if="!mostrarImagen"
       class="ocultar"
       :src="imagenFuente"
       alt="No se puede renderizar pokemon"
     />
     <img
-      v-if="mostrar"
+      v-if="mostrarImagen"
       :src="imagenFuente"
       alt="No se puede renderizar pokemon"
     />
@@ -30,7 +31,7 @@ export default {
   },
   data() {
     return {
-      mostrar: this.mostrarImagen,
+      mensaje1: "mensaje 1",
     };
   },
   computed: {
