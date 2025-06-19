@@ -7,7 +7,8 @@
       <router-link to="/holaMundo">HolaMundo</router-link>|
       <router-link to="/producto">Producto</router-link> |
       <router-link to="/chuck">Chuck Norris Chiste</router-link> |
-      <router-link to="/pokemon">Pokemón</router-link>
+      <router-link to="/pokemon">Pokemón</router-link> |
+      <router-link to="/responsivo">Responsivo</router-link> |
     </nav>
   </div>
 </template>

@@ -4,6 +4,7 @@ import EstudianteView from '@/views/EstudianteView.vue'
 import PreguntaView from '@/views/PreguntaView.vue'
 import HolaMundoView from '@/views/HolaMundoView.vue'
 import PokemonView from '@/views/PokemonView.vue'
+import ResponsivoView from '@/views/ResponsivoView.vue'
 
 const routes = [
   // Carga inicial / eager
@@ -31,6 +32,11 @@ const routes = [
     path: '/pokemon', // nombre de la ruta para navegar mediante la URL
     name: 'pokemonView',
     component: PokemonView
+  },
+  {
+    path: '/responsivo', // nombre de la ruta para navegar mediante la URL
+    name: 'responsivo',
+    component: ResponsivoView
   },
   // Carga BAJO DEMANDA lazy loaded/ -> No carga de inicio las páginas,
   // se carga cuendo se necesite.
